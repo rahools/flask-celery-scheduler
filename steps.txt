@@ -1,0 +1,16 @@
+Firstly, I'm trying to setup and run a RabbitMQ server on docker. RabbitMQ is a message queue service which will help with:
+1. having a central job queue which other microservices can access for possibility for serverless application.
+2. having fault torelance. If the worker crashes or dies without completing the task, task will stay in the queue triggering other worker have a crack at it.
+3. 
+
+the command that will run RabbitMQ on docker is:
+# docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+
+NOTE: username for the RabbitMQ web-portal at 'http://localhost:15672' is 'guest:guest'
+
+### TO start a celery worker
+# celery -A 'name of the file' worker --loglevel=info
+
+for me it would be:
+# celery -A task worker --loglevel=info
+
